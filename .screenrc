@@ -1,0 +1,2 @@
+hardstatus alwayslastline "%{rk}%H %{gk}%c %{yk}%M%d %{wb}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{wb}%?%+Lw%?"
+
