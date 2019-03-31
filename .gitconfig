@@ -5,3 +5,5 @@
 	name  = Loc Nguyen
 [merge]
 	conflictStyle = diff3
+[alias]
+	tree = log --graph --decorate --pretty=oneline --abbrev-commit --all

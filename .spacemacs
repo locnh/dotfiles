@@ -475,6 +475,13 @@ before packages are loaded."
   ;; Disable current line highlight
   (global-hl-line-mode -1)
 
+  ;; Mouse scroll
+  (unless window-system
+    (global-set-key (kbd "<mouse-4>") 'mwheel-scroll)
+    (global-set-key (kbd "<mouse-5>") 'mwheel-scroll)
+    (setq mouse-wheel-up-event 'mouse-5)
+    (setq mouse-wheel-down-event 'mouse-4))
+
   ;; Evil key binding
   (define-key evil-insert-state-map (kbd "C-w") 'beginning-of-line)
   (define-key evil-insert-state-map (kbd "C-e") 'end-of-line)
