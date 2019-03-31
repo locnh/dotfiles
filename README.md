@@ -3,3 +3,4 @@
 - [x] [.tmux.conf.local](https://github.com/gpakosz/.tmux)
 - [x] .screenrc
 - [x] .bashrc
+- [x] .gitconfig

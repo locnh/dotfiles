@@ -1,0 +1,7 @@
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[user]
+	email = me@locnh.com
+	name  = Loc Nguyen
+[merge]
+	conflictStyle = diff3
