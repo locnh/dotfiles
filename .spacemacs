@@ -219,7 +219,7 @@ It should only modify the values of Spacemacs settings."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro for Powerline"
-                               :size 12
+                               :size 13
                                :weight normal
                                :width normal
                                :powerline-scale 1.2)
@@ -478,16 +478,16 @@ before packages are loaded."
   ;; Full path of buffer in mode line
   (with-eval-after-load 'subr-x
     (setq-default mode-line-buffer-identification
-                  '(:eval (format-mode-line
-                           (propertized-buffer-identification
-                            (or (when-let*
-                                    ((buffer-file-truename buffer-file-truename)
-                                     (prj (cdr-safe (project-current)))
-                                     (prj-parent (file-name-directory (directory-file-name (expand-file-name prj)))))
-                                    (concat (file-relative-name
-                                             (file-name-directory buffer-file-truename) prj-parent)
-                                     (file-name-nondirectory buffer-file-truename)))
-                                    "%b"))))))
+      '(:eval (format-mode-line
+                (propertized-buffer-identification
+                (or (when-let*
+                        ((buffer-file-truename buffer-file-truename)
+                          (prj (cdr-safe (project-current)))
+                          (prj-parent (file-name-directory (directory-file-name (expand-file-name prj)))))
+                        (concat (file-relative-name
+                                  (file-name-directory buffer-file-truename) prj-parent)
+                          (file-name-nondirectory buffer-file-truename)))
+                        "%b"))))))
 
   ;; Disable current line highlight
   (global-hl-line-mode -1)
