@@ -33,7 +33,8 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(go
+   '(asciidoc
+     go
      python
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
@@ -52,7 +53,7 @@ This function should only modify configuration layer settings."
      (shell :variables
             shell-default-term-shell "/bin/zsh"
             ;; shell-default-shell 'eshell
-            shell-default-height 40
+            shell-default-height 30
             shell-default-position 'bottom)
      ;; spell-checking
      ;; syntax-checking
@@ -77,7 +78,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-frozen-packages '()
 
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '()
+   DOTSPACEMACS-excluded-packages '()
 
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
@@ -207,9 +208,9 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   ;; dotspacemacs-mode-line-theme '(all-the-icons :separator arrow :separator-scale 1.2)
-   ;; dotspacemacs-mode-line-theme '(spacemacs :separator slant :separator-scale 1.2)
-   dotspacemacs-mode-line-theme '(vim-powerline)
+   ;; dotspacemacs-mode-line-theme '(all-the-icons :separator arrow :separator-scale 1.5)
+   ;; dotspacemacs-mode-line-theme '(spacemacs :separator slant :separator-scale 1.3)
+   dotspacemacs-mode-line-theme '(vim-powerline :separator slant :separator-scale 1.2)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -320,7 +321,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup nil
+   dotspacemacs-maximized-at-startup t
 
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
@@ -469,6 +470,24 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+
+  ;; Home End Vim
+  (global-set-key [home] 'beginning-of-line)
+  (global-set-key [end] 'end-of-line)
+
+  ;; Full path of buffer in mode line
+  (with-eval-after-load 'subr-x
+    (setq-default mode-line-buffer-identification
+                  '(:eval (format-mode-line
+                           (propertized-buffer-identification
+                            (or (when-let*
+                                    ((buffer-file-truename buffer-file-truename)
+                                     (prj (cdr-safe (project-current)))
+                                     (prj-parent (file-name-directory (directory-file-name (expand-file-name prj)))))
+                                    (concat (file-relative-name
+                                             (file-name-directory buffer-file-truename) prj-parent)
+                                     (file-name-nondirectory buffer-file-truename)))
+                                    "%b"))))))
 
   ;; Disable current line highlight
   (global-hl-line-mode -1)
