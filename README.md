@@ -4,3 +4,4 @@
 - [x] .screenrc
 - [x] .bashrc
 - [x] .gitconfig
+- [x] [kitty](https://sw.kovidgoyal.net/kitty/)
